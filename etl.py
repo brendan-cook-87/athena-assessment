@@ -52,9 +52,6 @@ equ_owner_hist_df = glueContext.create_dynamic_frame.from_options(
     }
 )
 
-acc_entry_df.printSchema()
-acc_entry_df.show(2)
-
 loan_account_df = DynamicFrame.fromDF(
     acc_entry_df.select_fields('Id').toDF().dropDuplicates(),
     glueContext,
@@ -94,19 +91,6 @@ equ_owner_hist_df = equ_owner_hist_df.applyMapping(
         ('equitable_owner_id', 'varchar', 'equitable_owner_id', 'varchar')
     ]
 )
-
-
-loan_account_df.printSchema()
-loan_account_df.show(2)
-
-acc_entry_df.printSchema()
-acc_entry_df.show(2)
-
-equ_owner_df.printSchema()
-equ_owner_df.show(2)
-
-equ_owner_hist_df.printSchema()
-equ_owner_hist_df.show(2)
 
 glueContext.write_dynamic_frame.from_options(
     frame = equ_owner_df,
